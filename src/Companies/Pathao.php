@@ -8,6 +8,7 @@ use App\Companies\ShippingCompaniesInterface;
 use App\Entity\ShippingDetails;
 use App\Enums\LocationEnum;
 use App\ValueObject\Location;
+use RangeException;
 
 class Pathao implements ShippingCompaniesInterface
 {
@@ -41,6 +42,10 @@ class Pathao implements ShippingCompaniesInterface
 
     public function supports(): bool
     {
+        if (($this->location->getDistance() > 5)) {
+            throw new RangeException("Above 5Km is not accepted");
+            return false;
+        }
         return true;
     }
 }

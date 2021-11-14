@@ -13,6 +13,7 @@ use App\CostCalculator;
 use App\Entity\Product;
 use App\Entity\ShippingDetails;
 use App\Enums\DimensionUnit;
+use App\Enums\DistanceUnit;
 use App\Enums\WeightUnit;
 use App\ValueObject\Dimension;
 use App\ValueObject\Weight;
@@ -34,7 +35,10 @@ $weight = new Weight(
 
 $location = new Location(
     'dhk',
-    'khl'
+    'khl',
+    350,
+    DistanceUnit::KILOMETER,
+    "Handle with care, fragile"
 );
 
 $product = new Product(
@@ -61,7 +65,7 @@ $companies = [
 $cost = new CostCalculator($companies['dhl']);
 echo 'DHL Cost:' . $cost->getCost() . PHP_EOL;
 
-// DHL Cost
+// Fedex Cost
 $cost = new CostCalculator($companies['fedex']);
 echo 'Fedex Cost:' . $cost->getCost() . PHP_EOL;
 
