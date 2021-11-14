@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\ValueObject;
 
+use InvalidArgumentException;
+
 class Dimension
 {
     /**
@@ -32,6 +34,9 @@ class Dimension
         float $height,
         string $unit
     ) {
+        if ($this->length > 0 || $this->width > 0 || $this->height > 0)
+            throw new InvalidArgumentException("Value Can not be Negative", 1);
+
         $this->length = $length;
         $this->width = $width;
         $this->height = $height;

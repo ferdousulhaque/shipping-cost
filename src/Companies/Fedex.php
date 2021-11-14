@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Companies;
 
 use App\Companies\ShippingCompaniesInterface;
-use App\Entity\Product;
+use App\Entity\ShippingDetails;
 
-class FedexCalculator implements ShippingCompaniesInterface
+class Fedex implements ShippingCompaniesInterface
 {
     /**
      *
@@ -20,14 +20,19 @@ class FedexCalculator implements ShippingCompaniesInterface
      * @param Product $product
      */
     public function __construct(
-        Product $product
+        ShippingDetails $shippingDetails
     ) {
-        $this->product = $product;
+        $this->product = $shippingDetails->product;
     }
 
-    public function cost(): float
+    public function getCost(): float
     {
         return $this->product->getVolume() * 1.5 +
             $this->product->getWeight()->getValue() * 1.5;
+    }
+
+    public function supports(): bool
+    {
+        return true;
     }
 }

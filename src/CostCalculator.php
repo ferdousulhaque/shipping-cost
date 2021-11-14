@@ -25,8 +25,8 @@ class CostCalculator
      *
      * @return void
      */
-    public function cost()
+    public function getCost()
     {
-        return $this->shippingCompany->cost();
+        return $this->shippingCompany->getCost();
     }
 }
